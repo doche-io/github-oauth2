@@ -1,18 +1,20 @@
-use actix_web::{get, web, App, HttpServer, Responder};
+use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 
-#[get("/hello/{name}")]
-async fn greet(name: web::Path<String>) -> impl Responder {
-    format!("Hello {name}!")
+async fn auth200() -> impl Responder {
+    HttpResponse::Forbidden()
+}
+async fn auth500() -> impl Responder {
+    HttpResponse::BadRequest()
 }
 
-#[actix_web::main] // or #[tokio::main]
+#[tokio::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .route("/hello", web::get().to(|| async { "Hello World!" }))
-            .service(greet)
+            .service(web::resource("/auth").to(auth200))
+            .default_service(web::route().to(auth500))
     })
-    .bind(("127.0.0.1", 8080))?
-    .run()
-    .await
+        .bind(("0.0.0.0", 81))?
+        .run()
+        .await
 }
