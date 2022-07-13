@@ -1,7 +1,7 @@
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 
 async fn auth200() -> impl Responder {
-    HttpResponse::Forbidden()
+    HttpResponse::Ok()
 }
 async fn auth500() -> impl Responder {
     HttpResponse::BadRequest()
