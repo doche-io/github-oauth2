@@ -1,4 +1,4 @@
 FROM archlinux:latest
-RUN pacman --noconfirm -Syyu
-RUN pacman --noconfirm -S wget
-RUN wget 
+RUN pacman --noconfirm -Syyyu
+COPY ./target/release/auth /root/auth
+CMD /root/auth
