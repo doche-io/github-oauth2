@@ -1,10 +1,14 @@
 [package]
+edition = "2021"
 name = "auth"
 version = "0.1.0"
-edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 actix-web = "4"
-tokio = { version = "1.20.0", features = ["full"] }
+# redis = "0.21.5"
+actix-redis = "0.10"
+actix-session = "0.7.0"
+serde = "1.0.139"
+tokio = {version = "1.20.0", features = ["full"]}
